@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import CityCard from '../components/CityCard';
 import cities from './cities'; 
+import Background from '../components/BackGround';
 
 const Home = () => {
 
@@ -20,6 +21,7 @@ const Home = () => {
 
     return (
         <Container className="mt-5">
+            <Background/>
             {/* Título */}
             <h1 className="text-center mb-4">Ciudades en Departamento de Huila</h1>
 
