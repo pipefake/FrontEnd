@@ -1,9 +1,7 @@
 import React from 'react';
 import { Container, Col } from 'react-bootstrap';
 import CityCard from './CityCard';
-import './Cities.css'; // Adjust the path as necessary
-
-
+import './Cities.css'; 
 
 export const Cities = ({ filteredCities }) => {
   return (
