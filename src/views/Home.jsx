@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
-import CityCard from '../components/CityCard';
-import cities from './cities'; 
-import Background from '../components/BackGround';
+import citiesArray from './cities'; 
+import Background from '../components/Backgorund/BackGround';
+import {Cities} from '../components/Cities/Cities'; 
+
 
 const Home = () => {
 
@@ -15,20 +16,28 @@ const Home = () => {
     };
 
     //Filtramos con el valor del estados el array de cities
-    const filteredCities = cities.filter(city =>
+    const filteredCities = citiesArray.filter(city =>
         city.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     return (
         <Container className="mt-5">
             <Background/>
-            {/* Título */}
-            <h1 className="text-center mb-4">Ciudades en Departamento de Huila</h1>
+            <Container fixed="top">
 
+            {/* Título */}
+            <h1 className="font-weight-bold text-center mb-4 display-1">Ciudades en Departamento de Huila</h1>
+            <Row className="justify-content-center">
+                <div style={{ height: "8px", width:"60%", backgroundColor: "#FFFFFF" }}></div>
+                <div style={{ height: "8px", width:"60%", backgroundColor: "#007D00" }}></div>
+                <div style={{ height: "8px", width:"60%", backgroundColor: "#FCDD09 " }}></div>
+            </Row>
+            
             {/* Barra de búsqueda */}
-            <Row className="justify-content-center mb-4">
+            <Row className="mt-3 justify-content-center mb-4 ">
                 <Col xs={10} md={6}>
                     <Form.Control
+                        size="lg"
                         type="text"
                         placeholder="Buscar"
                         value={searchTerm}
@@ -36,15 +45,9 @@ const Home = () => {
                     />
                 </Col>
             </Row>
-
+            </Container>
             {/* Listado de las ciudades */}
-            <Row>
-                {filteredCities.map((city) => (
-                    <Col key={city.id} xs={12} md={4} className="mb-4">
-                        <CityCard city={city} />
-                    </Col>
-                ))}
-            </Row>
+            <Cities filteredCities={filteredCities} />
         </Container>
     );
 };

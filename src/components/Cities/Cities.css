@@ -1,0 +1,40 @@
+::-webkit-scrollbar {
+    width: 10px; 
+}
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+}
+.fixed-scrollable-container::-webkit-scrollbar-thumb {
+    background-color: #007D00; 
+    border-radius: 5px; 
+}
+
+.fixed-scrollable-container::-webkit-scrollbar-track {
+    background: #FCDD09; 
+}
+
+.cityCard{
+    border: white !important;
+    border-radius: 45%;
+    margin: 21px;
+}
+.fixed-scrollable-container {
+    display: flex;
+    scrollbar-color: #5992a275 #5994a04a;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-height: 659px;
+    overflow-y: auto;
+    padding: 15px;
+    background-color: 0 !important;
+    border: '1px solid #ccc', 
+    
+}
+.roundedImg {
+    border-radius: 25px;
+    height: 32vh;
+    object-fit: cover;
+    border-top-left-radius: 25px !important;
+    border-top-right-radius: 25px !important;
+}
