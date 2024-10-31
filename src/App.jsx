@@ -2,8 +2,9 @@
 import React from 'react';
 //Se debe agregar este componente una vez liste las ciudades
 // import Login from './components/Login';
-import Home from './views/Home';
+// import Home from './views/Home';
 import Header from './components/Header';
+import Touristplans from './views/Touristplans';
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       {/* Vista inicial del aplicativo */} 
       
       <Header />
-      <Home />
+      <Touristplans/>
+      {/* <Home /> */}
     </div>
   );
 }
