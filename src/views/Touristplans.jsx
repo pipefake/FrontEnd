@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Form } from 'react-bootstrap';
+import { Container, Row, Col, Form, Card, Nav } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import Nav from 'react-bootstrap/Nav';
-import neiva from './neiva.jpg';
+import PlanLayout from '../components/touristPlan/PlanLayout'; // Asegúrate de importar el nuevo componente
+import neiva from './neiva.jpg'; // Importa la imagen aquí para usarla en el PlanLayout
 
 const Touristplans = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -22,33 +21,13 @@ const Touristplans = () => {
             id: 1,
             name: 'Masaya San Agustín',
             description: 'N.º 1 en relación calidad-precio de 129 lugares donde alojarse en San Agustín',
-            imageUrl: 'https://example.com/image1.jpg',
+            imageUrl: neiva,  // Usamos la imagen importada
             rating: 4.5,
             reviews: 139,
             reviewer: 'Tim C',
             reviewText: 'La habitación y la cama eran muy bonitas y la vista desde la terraza era espectacular. El bar y el restaurante también eran excelentes. Tenían una extensa y muy buena selección de vinos.',
         },
-        {
-            id: 1,
-            name: 'Masaya San Agustín',
-            description: 'N.º 1 en relación calidad-precio de 129 lugares donde alojarse en San Agustín',
-            imageUrl: 'https://example.com/image1.jpg',
-            rating: 4.5,
-            reviews: 139,
-            reviewer: 'Tim C',
-            reviewText: 'La habitación y la cama eran muy bonitas y la vista desde la terraza era espectacular. El bar y el restaurante también eran excelentes. Tenían una extensa y muy buena selección de vinos.',
-        },
-        {
-            id: 1,
-            name: 'Masaya San Agustín',
-            description: 'N.º 1 en relación calidad-precio de 129 lugares donde alojarse en San Agustín',
-            imageUrl: 'https://example.com/image1.jpg',
-            rating: 4.5,
-            reviews: 139,
-            reviewer: 'Tim C',
-            reviewText: 'La habitación y la cama eran muy bonitas y la vista desde la terraza era espectacular. El bar y el restaurante también eran excelentes. Tenían una extensa y muy buena selección de vinos.',
-        },
-        // Agrega más objetos de hotel aquí si lo necesitas
+        // Aquí puedes agregar más hoteles si es necesario
     ];
 
     return (
@@ -91,31 +70,7 @@ const Touristplans = () => {
                 <Card.Body>
                     {activeTab === 'hotels' && (
                         <>
-                            
-                            <Row>
-                                {hotelsData.map(hotel => (
-                                    <Col md={12} key={hotel.id} className="mb-4">
-                                        <Card className="d-flex flex-row">
-                                            <Card.Img 
-                                                variant="left" 
-                                                src={neiva}
-                                                alt={hotel.name} 
-                                                style={{ width: '200px', objectFit: 'cover' }}
-                                            />
-                                            <Card.Body>
-                                                <Card.Title>{hotel.name}</Card.Title>
-                                                <Card.Text>{hotel.description}</Card.Text>
-                                                <Button variant="warning" className="mb-3">Mostrar precios</Button>
-                                                <div>
-                                                    <span>⭐ {hotel.rating} - {hotel.reviews} opiniones</span>
-                                                    <p><strong>De {hotel.reviewer}</strong></p>
-                                                    <p>"{hotel.reviewText}"</p>
-                                                </div>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
-                                ))}
-                            </Row>
+                            <PlanLayout hotelsData={hotelsData} /> {/* Pasamos los datos de los hoteles */}
                         </>
                     )}
                     {activeTab === 'activities' && (

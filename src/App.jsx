@@ -5,14 +5,16 @@ import React from 'react';
 // import Home from './views/Home';
 import Header from './components/Header';
 import Touristplans from './views/Touristplans';
+import { Routing } from "./router/Routing";
 
 function App() {
   return (
     <div>
       {/* Vista inicial del aplicativo */} 
+      <Routing />
+      {/* <Header />
       
-      <Header />
-      <Touristplans/>
+      <Touristplans/> */}
       {/* <Home /> */}
     </div>
   );
