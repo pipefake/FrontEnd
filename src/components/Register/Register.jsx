@@ -4,6 +4,8 @@ import { useForm } from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
 import './Register.css';
 import { Global } from '../../helpers/Global';
+import Swal from 'sweetalert2';
+import Login from "../Login/Login";
 
 const Register = () => {
 
@@ -30,7 +32,7 @@ const Register = () => {
         let newUser = form;
 
         // Petición a la API (Backend) para guardar el usuario en la BD
-        const request = await fetch(Global.url + '/users/user/create', {
+        const request = await fetch(Global.url + '/users/create', {
             method: 'POST',
             body: JSON.stringify(newUser),
             headers: {
@@ -42,7 +44,7 @@ const Register = () => {
         const data = await request.json();
 
         // Verificar si el estado de la respuesta es "created" seteamos la variable de estado saved con "saved"
-        if (request.status === 201 && data.status === "createdUser") {
+        if (request.status === 200 && data.status === "created") {
             setSaved("saved");
 
             // Mostrar el modal de éxito
@@ -52,7 +54,7 @@ const Register = () => {
                 confirmButtonText: 'Continuar',
             }).then(() => {
                 // Redirigir después de cerrar el modal
-                navigate('/login');
+                navigate('');
             });
 
         } else {
@@ -121,20 +123,6 @@ const Register = () => {
                                 // isInvalid={!!errors.file}
                                 />
                             </Form.Group>
-                            <Form.Group controlId="formRoles" className="mt-3">
-                                <Form.Label>Rol</Form.Label>
-                                <Form.Control
-                                    as="select"
-                                    name="roles"
-                                    onChange={changed}
-                                    value={form.roles || ''}
-                                >
-                                    <option value="client">Usuario</option>
-                                    <option value="admin">Administrador</option>
-                                </Form.Control>
-                            </Form.Group>
-
-
                             <Form.Group controlId="formEmail" className="mt-3">
                                 <Form.Label>Correo electrónico</Form.Label>
                                 <Form.Control
