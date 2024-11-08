@@ -12,6 +12,9 @@ const Register = () => {
     // Usar el hook personalizado useForm para cargar los datos del formulario
     const { form, changed } = useForm({});
 
+    // Estado para mostrar el estado de carga del formulario
+    const [loadingForm, setLoadingForm] = useState(false);
+
     // Estado para mostrar el resultado del registro del user en la BD
     const [saved, setSaved] = useState("not sended");
 
@@ -22,12 +25,17 @@ const Register = () => {
 
     const [error, setError] = useState("");
 
+    const handleStatusForm = () => {
+        setLoadingForm(prevStatus => !prevStatus);
+        setActive(true);
+    };
+
     // Método Guardar un usuario en la BD
     const handleSubmit = async (e) => {
-
+     
         // Prevenir que se actualice la pantalla
         e.preventDefault();
-
+        setLoadingForm(true); // activar el disparador de carga
         // Obtener los datos del formulario
         let newUser = form;
 
@@ -42,11 +50,11 @@ const Register = () => {
 
         // Obtener la información retornada por el backend
         const data = await request.json();
-
+       
         // Verificar si el estado de la respuesta es "created" seteamos la variable de estado saved con "saved"
         if (request.status === 200 && data.status === "created") {
             setSaved("saved");
-
+            setLoadingForm(false); 
             // Mostrar el modal de éxito
             Swal.fire({
                 title: data.message,
@@ -56,10 +64,10 @@ const Register = () => {
                 // Redirigir después de cerrar el modal
                 navigate('');
             });
-
+            setActive(false);
         } else {
             setSaved("error");
-
+            setActive(false);
             // Mostrar el modal de error
             Swal.fire({
                 title: data.message || "¡Error en el registro!",
@@ -161,8 +169,13 @@ const Register = () => {
 
                             {error && <p className="text-danger mt-3">{error}</p>}
 
-                            <Button variant="primary" type="submit" className="mt-3 w-100">
-                                Registrarse
+                            <Button 
+                                disabled={loadingForm} 
+                                variant="primary" 
+                                type="submit" 
+                                className="mt-3 w-100"
+                            >
+                                {loadingForm ? 'Loading...' : 'Registrarse'}
                             </Button>
                         </Form>
                     </div>

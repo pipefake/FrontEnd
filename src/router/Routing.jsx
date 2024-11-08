@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from '../components/Header';
+import Home from '../views/Home';
 
 
 
@@ -10,7 +11,7 @@ export const Routing = () => {
       <BrowserRouter>
           <Routes>
             {/* Cargamos los componentes de la ruta pública en rutas anidadas*/}
-            <Route path="/" element={<Header />}>
+            <Route path="/" element={<Home />}>
               {/* <Route index element={<Login />} />
               <Route path='login' element={<Login />} />
               <Route path='registro' element={<Register />} /> */}
