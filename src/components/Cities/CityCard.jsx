@@ -2,10 +2,19 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import neiva from './neiva.jpg';
 import './Cities.css'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 
 const CityCard = ({ city }) => {
+
+    const navigate = useNavigate(); 
+
+    const handleCardClick = () => {
+        navigate('/plans', { state: { cityName: city.name } });
+    };
+
     return (
-        <Card className="m-6 cityCard">
+        <Card className="m-6 cityCard" onClick={handleCardClick}>
             <Card.Img  className="roundedImg"  variant="top" src={neiva} alt={city.name} />
             <Card.Body>
                 <Card.Title>{city.name}</Card.Title>

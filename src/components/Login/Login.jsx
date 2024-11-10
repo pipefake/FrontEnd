@@ -7,10 +7,16 @@ import Swal from 'sweetalert2';
 
 //Componente login para inicio de sesion
 const Login = () => {
+
+    //Estados para activar formulario
+    const [saved, setSaved] = useState(false);
+
     // Usar el hook personalizado useForm para cargar los datos del formulario
     const { form, changed } = useForm({});
- // Estado para mostrar el estado de carga del formulario
- const [loadingForm, setLoadingForm] = useState(false);
+
+    // Estado para mostrar el estado de carga del formulario
+    const [loadingForm, setLoadingForm] = useState(false);
+    
     //Estados para activar formulario
     const [active, setActive] = useState(false);
 
@@ -21,7 +27,7 @@ const Login = () => {
     //Método de prueba que imprime los estados por consola
     // Método Guardar un usuario en la BD
     const handleSubmit = async (e) => {
-     
+
         // Prevenir que se actualice la pantalla
         e.preventDefault();
         setLoadingForm(true); // activar el disparador de carga
@@ -29,7 +35,7 @@ const Login = () => {
         let newUser = form;
 
         // Petición a la API (Backend) para guardar el usuario en la BD
-        const request = await fetch('http://localhost:3002', {
+        const request = await fetch(Global.url + '/users/login', {
             method: 'POST',
             body: JSON.stringify(newUser),
             headers: {
@@ -37,15 +43,13 @@ const Login = () => {
             }
         });
 
-       
-        
         // Obtener la información retornada por el backend
         const data = await request.json();
-       
+        localStorage.setItem('Token', data.loginResponse.token);
         // Verificar si el estado de la respuesta es "success" seteamos la variable de estado saved con "saved"
         if (request.status === 200 && data.status === "loggedIn") {
             setSaved("saved");
-            setLoadingForm(false); 
+            setLoadingForm(false);
             // Mostrar el modal de éxito
             Swal.fire({
                 title: data.message,
@@ -81,7 +85,7 @@ const Login = () => {
                                 <Form.Label>Correo electrónico</Form.Label>
                                 <Form.Control
                                     type="email"
-                                     name="email"
+                                    name="email"
                                     placeholder="Correo"
                                     onChange={changed}
                                     value={form.email || ''}
@@ -99,10 +103,10 @@ const Login = () => {
                                     required
                                 />
                             </Form.Group>
-                            <Button 
-                                disabled={loadingForm} 
-                                variant="primary" 
-                                type="submit" 
+                            <Button
+                                disabled={loadingForm}
+                                variant="primary"
+                                type="submit"
                                 className="mt-3 w-100"
                             >
                                 {loadingForm ? 'Loading...' : 'Ingresar'}
@@ -111,7 +115,7 @@ const Login = () => {
                     </div>
                 </div>
             )}
-            </Container>
+        </Container>
     );
 };
 

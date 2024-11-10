@@ -1,0 +1,10 @@
+.from{
+    padding: 6%;
+    background: #ffffff8f;
+    backdrop-filter: blur(1px);
+    font-weight: 700;
+    font-size: 28px;
+    color: #303030;
+    border-radius: 1%;
+    z-index: 8;
+}
