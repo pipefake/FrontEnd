@@ -7,14 +7,12 @@ const CityCard = ({ city }) => {
 
     const navigate = useNavigate(); 
 
-    
-
     const handleCardClick = () => {
-        navigate('/plans', { state: { cityName: city.name } });
+        navigate('/plans' + `/${city.id}`);
     };
 
     return (
-        <Card className="m-6 cityCard" onClick={handleCardClick}>
+        <Card className="m-6 cityCard" onClick={handleCardClick} role='button' tabIndex={0}>
             <Card.Img  className="roundedImg"  variant="top" src={city.image} alt={city.name} />
             <Card.Body>
                 <Card.Title>{city.name}</Card.Title>

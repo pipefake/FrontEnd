@@ -11,7 +11,7 @@ export const Routing = () => {
       <Routes>
         <Route path="/" element={<Home />} />
 
-        <Route path="/plans" element={<Touristplans />} />
+        <Route path="/plans/:cityId" element={<Touristplans />} />
         <Route path="/reservation" element={<Reservation />} />
 
       </Routes>
