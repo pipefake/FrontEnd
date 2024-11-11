@@ -5,8 +5,12 @@ import PlanLayout from '../components/touristPlan/PlanLayout'; // Asegúrate de 
 import neiva from './neiva.jpg'; // Importa la imagen aquí para usarla en el PlanLayout
 import Background from '../components/Backgorund/BackGround';
 import './styles.css';
+import { useLocation } from 'react-router-dom';
 
 const Touristplans = () => {
+
+    const location = useLocation();
+    const cityName = location.state?.cityID;
 
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -24,150 +28,170 @@ const Touristplans = () => {
     //listado de tours temporal
     const toursData = [
         {
-            id: 1,
-            name: 'Masaya San Agustín',
-            description: 'N.º 1 en relación calidad-precio de 129 lugares donde alojarse en San Agustín',
-            imageUrl: neiva,  // Usamos la imagen importada
-            rating: 4.5,
-            reviews: 139,
-            reviewer: 'Tim C',
-            reviewText: 'La habitación y la cama eran muy bonitas y la vista desde la terraza era espectacular. El bar y el restaurante también eran excelentes. Tenían una extensa y muy buena selección de vinos.',
+            "location": "67301f2f75d9529b4c38738d",
+            "name": "Plan Vereda upar",
+            "description": "Luxury villa on the beach with private pool and ocean views.",
+            "address": "123 Ocean Drive, Malibu, CA",
+            "price": 500,
+            "coverImage": "villa_beach.png",
+            "images": ["villa1.png", "villa2.png", "villa3.png"],
+            "available": true,
+            "createdBy": "60b6c0e0f2a1c143d8d7f3b1",
+            "createdAt": "2024-11-10T08:00:00.000Z"
         },
         {
-            id: 11,
-            name: 'Tour en el Parque Natural de los Nevados',
-            description: 'Explora la belleza natural de los Nevados de Tolima, un destino ideal para los amantes del ecoturismo. Disfruta de caminatas, vistas impresionantes y la fauna local.',
-            imageUrl: neiva,  // Puedes reemplazar con una imagen relacionada con los Nevados de Tolima
-            rating: 4.7,
-            reviews: 180,
-            reviewer: 'Carlos G',
-            reviewText: 'Una experiencia única. El trekking por el parque es desafiante, pero las vistas valen la pena. Un lugar ideal para los amantes de la naturaleza y las montañas.',
+            "location": "67301f2f75d9529b4c38738d",
+            "name": "Seaside Cottage",
+            "description": "Cozy cottage by the sea, ideal for a romantic getaway.",
+            "address": "987 Shore Lane, Malibu, CA",
+            "price": 200,
+            "coverImage": "cottage_seaside.png",
+            "images": ["cottage1.png", "cottage2.png"],
+            "available": true,
+            "createdBy": "60b6c0e0f2a1c143d8d7f3b3",
+            "createdAt": "2024-11-10T08:00:00.000Z"
         },
         {
-            id: 12,
-            name: 'Recorrido cultural en Ibagué',
-            description: 'Descubre la historia y cultura de Ibagué con un recorrido por los museos locales, plazas históricas y la famosa catedral. Perfecto para los que buscan sumergirse en la cultura tolimense.',
-            imageUrl: neiva,  // Puedes usar una imagen de Ibagué o su catedral
-            rating: 4.3,
-            reviews: 150,
-            reviewer: 'María T',
-            reviewText: 'Un recorrido fascinante. Ibagué tiene una gran oferta cultural que no te puedes perder. Los guías turísticos son muy bien informados.',
-        },
-        {
-            id: 13,
-            name: 'Visita al Lago de Coello',
-            description: 'Disfruta de un día de relax en el Lago de Coello, un hermoso destino para actividades acuáticas y paseos en bote. Ideal para pasar un día tranquilo en familia.',
-            imageUrl: neiva,  // Puedes reemplazar con una imagen del Lago de Coello
-            rating: 4.4,
-            reviews: 120,
-            reviewer: 'Laura V',
-            reviewText: 'Un lugar increíble para desconectar. El paisaje es hermoso y las actividades acuáticas son muy divertidas. Perfecto para una escapada en familia.',
+            "location": "60b6c0e0f2a1c143d8d7f3b3",
+            "name": "Mountain Cabin",
+            "description": "A cozy cabin in the mountains with stunning views and a fireplace.",
+            "address": "123 Alpine Road, Mountainview, CO",
+            "price": 150,
+            "coverImage": "cabin_image.png",
+            "images": ["cabin1.png", "cabin2.png", "cabin3.png"],
+            "available": true,
+            "createdBy": "60b6c0e0f2a1c143d8d7f3b4",
+            "createdAt": "2024-11-10T08:00:00.000Z"
         },
     ];
 
     //listado de hoteles temporal
     const hotelsData = [
         {
-            id: 1,
-            name: 'Masaya San Agustín',
-            description: 'N.º 1 en relación calidad-precio de 129 lugares donde alojarse en San Agustín',
-            imageUrl: neiva,  // Usamos la imagen importada
-            rating: 4.5,
-            reviews: 139,
-            reviewer: 'Tim C',
-            reviewText: 'La habitación y la cama eran muy bonitas y la vista desde la terraza era espectacular. El bar y el restaurante también eran excelentes. Tenían una extensa y muy buena selección de vinos.',
+            "location": "67301f2f75d9529b4c38738d",
+            "name": "Beachfront Villa",
+            "description": "Luxury villa on the beach with private pool and ocean views.",
+            "address": "123 Ocean Drive, Malibu, CA",
+            "price": 500,
+            "coverImage": "villa_beach.png",
+            "images": ["villa1.png", "villa2.png", "villa3.png"],
+            "available": true,
+            "createdBy": "60b6c0e0f2a1c143d8d7f3b1",
+            "createdAt": "2024-11-10T08:00:00.000Z"
         },
         {
-            id: 2,
-            name: 'Hotel San Agustín Plaza',
-            description: 'Ubicado en el corazón de San Agustín, excelente ubicación con un servicio excepcional.',
-            imageUrl: neiva,  // Puedes reemplazar con otra imagen si es necesario
-            rating: 4.2,
-            reviews: 200,
-            reviewer: 'Laura M',
-            reviewText: 'El hotel estaba bien situado, con fácil acceso a restaurantes y atracciones locales. El servicio fue muy atento y las instalaciones bien cuidadas.',
+            "location": "67301f2f75d9529b4c38738d",
+            "name": "Seaside Cottage",
+            "description": "Cozy cottage by the sea, ideal for a romantic getaway.",
+            "address": "987 Shore Lane, Malibu, CA",
+            "price": 200,
+            "coverImage": "cottage_seaside.png",
+            "images": ["cottage1.png", "cottage2.png"],
+            "available": true,
+            "createdBy": "60b6c0e0f2a1c143d8d7f3b3",
+            "createdAt": "2024-11-10T08:00:00.000Z"
         },
         {
-            id: 3,
-            name: 'Hotel Boutique Villa Julieth',
-            description: 'Un lugar tranquilo y acogedor para descansar en medio de la naturaleza.',
-            imageUrl: neiva,
-            rating: 4.7,
-            reviews: 115,
-            reviewer: 'Carlos G',
-            reviewText: 'El ambiente era increíble, rodeado de jardines y espacios verdes. El personal fue amable y la comida deliciosa. ¡Definitivamente regresaré!',
+            "location": "60b6c0e0f2a1c143d8d7f3b3",
+            "name": "Mountain Cabin",
+            "description": "A cozy cabin in the mountains with stunning views and a fireplace.",
+            "address": "123 Alpine Road, Mountainview, CO",
+            "price": 150,
+            "coverImage": "cabin_image.png",
+            "images": ["cabin1.png", "cabin2.png", "cabin3.png"],
+            "available": true,
+            "createdBy": "60b6c0e0f2a1c143d8d7f3b4",
+            "createdAt": "2024-11-10T08:00:00.000Z"
         },
         {
-            id: 4,
-            name: 'Hotel La Casa de Nelly',
-            description: 'Un hotel familiar con excelente atención y ambientes llenos de historia.',
-            imageUrl: neiva,
-            rating: 4.3,
-            reviews: 98,
-            reviewer: 'Sofia P',
-            reviewText: 'Las instalaciones estaban muy bien cuidadas y la atención fue increíble. Sin embargo, el área de la piscina podría mejorar un poco.',
+            "location": "60b6c0e0f2a1c143d8d7f3b3",
+            "name": "Mountain Lodge",
+            "description": "Rustic lodge with panoramic mountain views and hiking trails nearby.",
+            "address": "456 Pine Road, Mountainview, CO",
+            "price": 175,
+            "coverImage": "lodge_mountain.png",
+            "images": ["lodge1.png", "lodge2.png"],
+            "available": true,
+            "createdBy": "60b6c0e0f2a1c143d8d7f3b5",
+            "createdAt": "2024-11-10T08:00:00.000Z"
         },
         {
-            id: 5,
-            name: 'Hotel Campestre El Otoño',
-            description: 'Un refugio campestre con vistas espectaculares y un ambiente relajante.',
-            imageUrl: neiva,
-            rating: 4.6,
-            reviews: 150,
-            reviewer: 'Marcelo R',
-            reviewText: 'La experiencia fue única. El hotel tiene una excelente vista, es muy tranquilo y el personal es muy cordial. Ideal para desconectar de la rutina.',
+            "location": "60b6c0e0f2a1c143d8d7f3b4",
+            "name": "City Apartment",
+            "description": "Modern apartment in the heart of the city with skyline views.",
+            "address": "789 Downtown St, New York, NY",
+            "price": 300,
+            "coverImage": "apartment_city.png",
+            "images": ["apartment1.png", "apartment2.png"],
+            "available": true,
+            "createdBy": "60b6c0e0f2a1c143d8d7f3b6",
+            "createdAt": "2024-11-10T08:00:00.000Z"
         },
         {
-            id: 6,
-            name: 'Hostal San Agustín',
-            description: 'Hostal económico con habitaciones cómodas y buena ubicación.',
-            imageUrl: neiva,
-            rating: 3.8,
-            reviews: 65,
-            reviewer: 'Ana L',
-            reviewText: 'Un lugar sencillo, pero muy bien ubicado. El personal fue amable y las habitaciones estaban limpias, aunque las instalaciones no son lujosas.',
+            "location": "60b6c0e0f2a1c143d8d7f3b4",
+            "name": "Luxury Penthouse",
+            "description": "Penthouse with private terrace and incredible city views.",
+            "address": "1010 Fifth Ave, New York, NY",
+            "price": 600,
+            "coverImage": "penthouse_city.png",
+            "images": ["penthouse1.png", "penthouse2.png"],
+            "available": true,
+            "createdBy": "60b6c0e0f2a1c143d8d7f3b7",
+            "createdAt": "2024-11-10T08:00:00.000Z"
         },
         {
-            id: 7,
-            name: 'Hotel Villa Rosa',
-            description: 'Un hotel de lujo con todas las comodidades modernas y vistas espectaculares.',
-            imageUrl: neiva,
-            rating: 4.8,
-            reviews: 220,
-            reviewer: 'Javier F',
-            reviewText: 'Increíble estancia. Las vistas desde el balcón eran impresionantes. El personal fue muy profesional y la comida excelente. Un hotel ideal para disfrutar de una escapada de lujo.',
+            "location": "60b6c0e0f2a1c143d8d7f3b5",
+            "name": "Desert Oasis",
+            "description": "Beautiful house with desert landscape views, ideal for relaxation.",
+            "address": "123 Sand St, Phoenix, AZ",
+            "price": 250,
+            "coverImage": "desert_oasis.png",
+            "images": ["oasis1.png", "oasis2.png"],
+            "available": true,
+            "createdBy": "60b6c0e0f2a1c143d8d7f3b8",
+            "createdAt": "2024-11-10T08:00:00.000Z"
         },
         {
-            id: 8,
-            name: 'Hotel Tierra Bella',
-            description: 'Hotel con un enfoque sostenible, rodeado de naturaleza y fauna local.',
-            imageUrl: neiva,
-            rating: 4.4,
-            reviews: 180,
-            reviewer: 'Paola S',
-            reviewText: 'Me encantó la experiencia. Estar tan cerca de la naturaleza fue muy relajante, y el hotel tiene un enfoque ecológico que aprecio mucho. El desayuno también fue delicioso.',
+            "location": "60b6c0e0f2a1c143d8d7f3b5",
+            "name": "Desert Villa",
+            "description": "Luxury villa in the desert with a pool and breathtaking views.",
+            "address": "456 Cactus Road, Phoenix, AZ",
+            "price": 400,
+            "coverImage": "villa_desert.png",
+            "images": ["desertvilla1.png", "desertvilla2.png"],
+            "available": true,
+            "createdBy": "60b6c0e0f2a1c143d8d7f3b9",
+            "createdAt": "2024-11-10T08:00:00.000Z"
         },
         {
-            id: 9,
-            name: 'Hotel Las Palmas',
-            description: 'Ideal para una escapada en familia, con actividades para todos los gustos.',
-            imageUrl: neiva,
-            rating: 4.0,
-            reviews: 170,
-            reviewer: 'David T',
-            reviewText: 'El hotel tiene una gran variedad de actividades y su personal es muy amigable. Ideal para quienes viajan con niños. Las habitaciones eran cómodas, pero las instalaciones podrían mejorar un poco.',
+            "location": "60b6c0e0f2a1c143d8d7f3b6",
+            "name": "Countryside Cottage",
+            "description": "Charming cottage in the countryside with garden views.",
+            "address": "123 Green Way, Asheville, NC",
+            "price": 180,
+            "coverImage": "cottage_countryside.png",
+            "images": ["countryside1.png", "countryside2.png"],
+            "available": true,
+            "createdBy": "60b6c0e0f2a1c143d8d7f3b0",
+            "createdAt": "2024-11-10T08:00:00.000Z"
         },
         {
-            id: 10,
-            name: 'Finca Hotel El Eden',
-            description: 'Escapada campestre con encanto rústico, perfecto para desconectar.',
-            imageUrl: neiva,
-            rating: 4.9,
-            reviews: 95,
-            reviewer: 'María C',
-            reviewText: 'Un lugar perfecto para descansar. El ambiente rústico es muy acogedor, y el entorno natural te permite relajarte completamente. El servicio es excelente.',
-        },
+            "location": "60b6c0e0f2a1c143d8d7f3b6",
+            "name": "Farmhouse Retreat",
+            "description": "Spacious farmhouse with nearby trails and lakes.",
+            "address": "456 Maple Rd, Asheville, NC",
+            "price": 220,
+            "coverImage": "farmhouse_retreat.png",
+            "images": ["farmhouse1.png", "farmhouse2.png"],
+            "available": true,
+            "createdBy": "60b6c0e0f2a1c143d8d7f3c1",
+            "createdAt": "2024-11-10T08:00:00.000Z"
+        }
     ];
+
+    const hotelCity = hotelsData.filter(hotel => hotel.location.toLowerCase().includes(cityName));
+
+    const planCity = hotelsData.filter(plan => plan.location.toLowerCase().includes(cityName));
 
     //Filtra con el buscador
     const filteredData = (activeTab === 'hotels' ? hotelsData : toursData).filter((item) =>
@@ -212,7 +236,7 @@ return (
             <Card.Body className="scroller">
                 
                 {activeTab === 'hotels' && (
-                    <PlanLayout hotelsData={filteredData} /> )}
+                    <PlanLayout hotelsData={hotelCity} /> )}
 
                 {activeTab === 'activities' && (
                     <PlanLayout hotelsData={filteredData} /> 

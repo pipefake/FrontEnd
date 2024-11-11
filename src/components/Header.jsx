@@ -11,10 +11,25 @@ const Header = () => {
     const token = localStorage.getItem('Token');
 
     const handleLogout = () => {
-
         localStorage.removeItem('Token');
         navigate('/'); // Redirect to login page
     };
+    const handleReservas = () => {
+        navigate('/reservas'); // Redirect to login page
+    };
+
+    const handlePublicar = () => {
+        navigate('/publicar'); // Redirect to login page
+    };
+
+    const handlePerfil = () => {
+        navigate('/perfil'); // Redirect to login page
+    };
+
+    const handleHome = () => {
+        navigate('/'); // Redirect to login page
+    };
+
 
     return (
         <Container className="mt-5 ju justify-content-end">
@@ -34,13 +49,16 @@ const Header = () => {
                     <>
                     <row className="justify-content-center row">
                     <Col xs={10} md={6} lg={2} className="align-center">
-                        <Button className="btnLogin" variant="outline-dark">👤 Perfil</Button>
+                        <Button className="btnLogin" variant="outline-dark" onClick={()=>{handleHome()}}> Inicio</Button>
+                        </Col>
+                    <Col xs={10} md={6} lg={2} className="align-center">
+                        <Button className="btnLogin" variant="outline-dark" onClick={()=>{handlePerfil()}}>👤 Perfil</Button>
                         </Col>
                         <Col xs={10} md={6} lg={2}>
-                        <Button className="btnLogin" variant="outline-dark">📅 Reservas</Button>
+                        <Button className="btnLogin" variant="outline-dark" onClick={()=>{handleReservas()}}>📅 Reservas</Button>
                         </Col>
                         <Col xs={10} md={6} lg={2}>
-                        <Button className="btnLogin" variant="outline-dark">✏️ Publicar</Button>
+                        <Button className="btnLogin" variant="outline-dark" onClick={()=>{handlePublicar()}}>✏️ Publicar</Button>
                         </Col>
                         <Col xs={10} md={6} lg={2}>
                         <Button className="btnLogin" variant="outline-dark" onClick={()=>{handleLogout()}}> 🚪 Salir</Button>

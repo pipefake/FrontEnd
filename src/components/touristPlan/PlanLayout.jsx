@@ -22,7 +22,7 @@ const PlanLayout = ({ hotelsData }) => {
     return (
         <Row>
             {hotelsData.map((hotel) => (
-                <Col md={12} key={hotel.id} className="mb-4">
+                <Col md={12} key={hotel._id} className="mb-4">
                     <Card className="d-flex flex-row">
                         <Card.Img
                             variant="left"

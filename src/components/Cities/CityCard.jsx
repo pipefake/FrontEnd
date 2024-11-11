@@ -10,7 +10,7 @@ const CityCard = ({ city }) => {
     const navigate = useNavigate(); 
 
     const handleCardClick = () => {
-        navigate('/plans', { state: { cityName: city.name } });
+        navigate('/plans', { state: { cityID: city._id } });
     };
 
     return (

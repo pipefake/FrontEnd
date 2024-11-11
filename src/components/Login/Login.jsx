@@ -16,7 +16,7 @@ const Login = () => {
 
     // Estado para mostrar el estado de carga del formulario
     const [loadingForm, setLoadingForm] = useState(false);
-    
+
     //Estados para activar formulario
     const [active, setActive] = useState(false);
 
@@ -45,7 +45,8 @@ const Login = () => {
 
         // Obtener la información retornada por el backend
         const data = await request.json();
-        localStorage.setItem('Token', data.loginResponse.token);
+       
+        localStorage.setItem('Token', data.data.token);
         // Verificar si el estado de la respuesta es "success" seteamos la variable de estado saved con "saved"
         if (request.status === 200 && data.status === "loggedIn") {
             setSaved("saved");
