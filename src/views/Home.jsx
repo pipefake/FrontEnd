@@ -23,7 +23,7 @@ const Home = () => {
     const handleSubmit = async () => {
         try {
             // Petición a la API (Backend) para listar las ciudades
-            const response = await fetch('http://localhost:3002/api/locations', {
+            const response = await fetch('https://huila-travel-backend.onrender.com/api/locations/cities', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
