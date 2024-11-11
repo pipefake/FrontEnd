@@ -3,6 +3,9 @@ import Header from '../components/Header';
 import Home from '../views/Home'
 import Reservation from '..//components/Reservation/Reservation';
 import Touristplans  from '../views/Touristplans';
+import { Publicar } from '../views/Publicar';
+import { Perfil } from '../views/Perfil';
+import { Reservas } from '../views/Reservas';
 
 export const Routing = () => {
     return (
@@ -13,6 +16,9 @@ export const Routing = () => {
 
         <Route path="/plans/:cityId" element={<Touristplans />} />
         <Route path="/reservation" element={<Reservation />} />
+        <Route path="/publicar" element={<Publicar />} />
+        <Route path="/perfil" element={<Perfil />} />
+        <Route path="/reservas" element={<Reservas />} />
 
       </Routes>
     </BrowserRouter>
