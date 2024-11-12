@@ -41,7 +41,6 @@ const Home = () => {
 
             // Actualizamos el estado con los datos de las ciudades
             setFetchedCities(cities);
-            console.log(cities); 
         } catch (error) {
             console.error('Hay un error en la petición', error);
         }

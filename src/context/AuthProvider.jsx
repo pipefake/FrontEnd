@@ -34,10 +34,6 @@ export const AuthProvider = ({ children }) => {
     }
 
     try {
-      // Transformar los datos a un objeto de javascript
-      const userObj = JSON.parse(user);
-      const userId = userObj._id;
-
       // Petición Ajax al backend que compruebe el token y que nos devuelva todos los datos del usuario
       const request = await fetch(Global.url + "/users/profile", {
         method: "GET",
@@ -54,7 +50,7 @@ export const AuthProvider = ({ children }) => {
       const data = await request.json();
 
       // Setear el estado de Auth
-      setAuth(data.data.user);
+      setAuth(data.user);
       
       // Asegurar que loading se actualice a false
       setLoading(false);

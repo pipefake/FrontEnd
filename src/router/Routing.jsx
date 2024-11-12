@@ -15,7 +15,6 @@ export const Routing = () => {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <Header />
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Home />} />

@@ -22,7 +22,7 @@ const PlanLayout = ({ hotelsData }) => {
     };
 
     const handleGoToDetailTouristPlan = (idTouristPlan) => {
-        navigate(`/auth/plan/detail/${idTouristPlan}`)
+        navigate(`/plan/detail/${idTouristPlan}`)
     }
 
     return (

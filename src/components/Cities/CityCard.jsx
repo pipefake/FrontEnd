@@ -8,7 +8,7 @@ const CityCard = ({ city }) => {
     const navigate = useNavigate(); 
 
     const handleCardClick = () => {
-        navigate('/auth/plans' + `/${city.id}`);
+        navigate('/plans' + `/${city.id}`);
     };
 
     return (
