@@ -55,7 +55,7 @@ const Login = () => {
             setSaved("saved");
             setLoadingForm(false);
             // Seteamos los datos del usuario en el Auth
-            setAuth(data.user);
+            setAuth(data.data.user);
             // Mostrar el modal de éxito
             Swal.fire({
                 title: data.message,
