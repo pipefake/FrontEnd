@@ -7,71 +7,28 @@ export const Publicar = () => {
     const { form, changed } = useForm({});
     const [loadingForm, setLoadingForm] = useState(false);
     const [fetchedPlans, setFetchedPlans] = useState([]);
+    const [hotelsData, setHotelsData] = useState([]);
     const [showForm, setShowForm] = useState(false);
 
-    const hotelsData = [
-        {
-            "location": "67301f2f75d9529b4c38738d",
-            "name": "Beachfront Villa",
-            "description": "Luxury villa on the beach with private pool and ocean views.",
-            "address": "123 Ocean Drive, Malibu, CA",
-            "price": 500,
-            "coverImage": "villa_beach.png",
-            "images": ["villa1.png", "villa2.png", "villa3.png"],
-            "available": true,
-            "createdBy": "60b6c0e0f2a1c143d8d7f3b1",
-            "createdAt": "2024-11-10T08:00:00.000Z"
-        },
-        {
-            "location": "67301f2f75d9529b4c38738d",
-            "name": "Seaside Cottage",
-            "description": "Cozy cottage by the sea, ideal for a romantic getaway.",
-            "address": "987 Shore Lane, Malibu, CA",
-            "price": 200,
-            "coverImage": "cottage_seaside.png",
-            "images": ["cottage1.png", "cottage2.png"],
-            "available": true,
-            "createdBy": "60b6c0e0f2a1c143d8d7f3b3",
-            "createdAt": "2024-11-10T08:00:00.000Z"
-        },
-        {
-            "location": "60b6c0e0f2a1c143d8d7f3b3",
-            "name": "Mountain Cabin",
-            "description": "A cozy cabin in the mountains with stunning views and a fireplace.",
-            "address": "123 Alpine Road, Mountainview, CO",
-            "price": 150,
-            "coverImage": "cabin_image.png",
-            "images": ["cabin1.png", "cabin2.png", "cabin3.png"],
-            "available": true,
-            "createdBy": "60b6c0e0f2a1c143d8d7f3b4",
-            "createdAt": "2024-11-10T08:00:00.000Z"
-        },
-        {
-            "location": "60b6c0e0f2a1c143d8d7f3b3",
-            "name": "Mountain Lodge",
-            "description": "Rustic lodge with panoramic mountain views and hiking trails nearby.",
-            "address": "456 Pine Road, Mountainview, CO",
-            "price": 175,
-            "coverImage": "lodge_mountain.png",
-            "images": ["lodge1.png", "lodge2.png"],
-            "available": true,
-            "createdBy": "60b6c0e0f2a1c143d8d7f3b5",
-            "createdAt": "2024-11-10T08:00:00.000Z"
-        },
-        {
-            "location": "60b6c0e0f2a1c143d8d7f3b4",
-            "name": "City Apartment",
-            "description": "Modern apartment in the heart of the city with skyline views.",
-            "address": "789 Downtown St, New York, NY",
-            "price": 300,
-            "coverImage": "apartment_city.png",
-            "images": ["apartment1.png", "apartment2.png"],
-            "available": true,
-            "createdBy": "60b6c0e0f2a1c143d8d7f3b6",
-            "createdAt": "2024-11-10T08:00:00.000Z"
-        }
-    ];
-    
+    // const hotelsData = [
+    //     {
+    //         "name": "Beachfront Villa",
+    //         "description": "Luxury villa on the beach with private pool and ocean views.",
+    //         "location": {
+    //             "city": "Malibu",
+    //             "lat": 34.0259,
+    //             "lon": -118.7798
+    //         },
+    //         "address": "123 Ocean Drive, Malibu, CA",
+    //         "price": 500,
+    //         "coverImage": "villa_beach.png",
+    //         "images": ["villa1.png", "villa2.png", "villa3.png"],
+    //         "available": true,
+    //         "createdBy": "60b6c0e0f2a1c143d8d7f3b1",
+    //         "createdAt": "2024-11-10T08:00:00.000Z"
+    //     },
+    //     // Add other hotel data similarly...
+    // ];
 
     useEffect(() => {
         fetchPlans();
@@ -79,10 +36,10 @@ export const Publicar = () => {
 
     const fetchPlans = async () => {
         try {
-            const response = await fetch('http://localhost:3002/api/plans');
+            const response = await fetch('http://localhost:3002/api/touristPlans');
             if (!response.ok) throw new Error('Error fetching plans');
             const plans = await response.json();
-            setFetchedPlans(plans);
+            setHotelsData(plans);
         } catch (error) {
             console.error('Error fetching plans:', error);
         }
@@ -92,12 +49,30 @@ export const Publicar = () => {
         e.preventDefault();
         setLoadingForm(true);
         try {
+            // Create the request body with the correct structure
+            const requestBody = {
+                location: {
+                    name: form.location?.name, // Add the name of the location
+                    description: form.location?.description, // Add a description of the location
+                    city: form.location?.city,
+                    lat: form.location?.lat,
+                    lon: form.location?.lon,
+                },
+                name: form.name,
+                description: form.description,
+                address: form.address,
+                price: form.price,
+                coverImage: "default_image.png", // You can modify this if you have an image upload feature
+                images: [], // Assuming you will add images later
+                available: true, // Set to true by default
+            };
+
             const response = await fetch('http://localhost:3002/api/plans', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(form)
+                body: JSON.stringify(requestBody)
             });
             if (!response.ok) throw new Error('Error submitting the plan');
             const newPlan = await response.json();
@@ -111,14 +86,14 @@ export const Publicar = () => {
     };
 
     return (
-        <div>
+        <>
             <Background />
             <Container>
                 <h1 className="font-weight-bold text-center mb-4 display-3">Publica tus planes turísticos</h1>
                 <Row className="justify-content-center">
-                    <div style={{ height: "8px", width: "60%", backgroundColor: "#FFFFFF" }}></div>
-                    <div style={{ height: "8px", width: "60%", backgroundColor: "#007D00" }}></div>
-                    <div style={{ height: "8px", width: "60%", backgroundColor: "#FCDD09" }}></div>
+                    <Row style={{ height: "8px", width: "60%", backgroundColor: "#FFFFFF" }}></Row>
+                    <Row style={{ height: "8px", width: "60%", backgroundColor: "#007D00" }}></Row>
+                    <Row style={{ height: "8px", width: "60%", backgroundColor: "#FCDD09" }}></Row>
                 </Row>
             </Container>
 
@@ -140,17 +115,64 @@ export const Publicar = () => {
                                 required
                             />
                         </Form.Group>
-                        <Form.Group controlId="formBasicLocation">
-                            <Form.Label>Locación</Form.Label>
+
+                        <Form.Group controlId="formBasicLocationName">
+                            <Form.Label>Nombre de la ubicación</Form.Label>
                             <Form.Control
                                 type="text"
-                                name="location"
-                                placeholder="Locación"
+                                name="locationName"
+                                placeholder="Nombre de la ubicación"
                                 onChange={changed}
-                                value={form.location || ''}
+                                value={form.location?.name || ''}
                                 required
                             />
                         </Form.Group>
+
+                        <Form.Group controlId="formBasicLocationDescription">
+                            <Form.Label>Descripción de la ubicación</Form.Label>
+                            <Form.Control
+                                as="textarea"
+                                name="locationDescription"
+                                placeholder="Descripción de la ubicación"
+                                onChange={changed}
+                                value={form.location?.description || ''}
+                            />
+                        </Form.Group>
+
+                        <Form.Group controlId="formBasicCity">
+                            <Form.Label>Ciudad</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="locationCity"
+                                placeholder="Ciudad"
+                                onChange={changed}
+                                value={form.location?.city || ''}
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicLat">
+                            <Form.Label>Latitud</Form.Label>
+                            <Form.Control
+                                type="number"
+                                name="locationLat"
+                                placeholder="Latitud"
+                                onChange={changed}
+                                value={form.location?.lat || ''}
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicLon">
+                            <Form.Label>Longitud</Form.Label>
+                            <Form.Control
+                                type="number"
+                                name="locationLon"
+                                placeholder="Longitud"
+                                onChange={changed}
+                                value={form.location?.lon || ''}
+                                required
+                            />
+                        </Form.Group>
+
                         <Form.Group controlId="formBasicDescription" className="mt-3">
                             <Form.Label>Descripción</Form.Label>
                             <Form.Control
@@ -195,20 +217,24 @@ export const Publicar = () => {
                     </Form>
                 ) : (
                     <Row>
-                        {hotelsData.map((plan, index) => (
+                        {hotelsData.map((hotel, index) => (
                             <Card key={index} className="mb-3 w-100">
+                                <Card.Img variant="top" src={hotel.coverImage} alt={hotel.name} />
                                 <Card.Body>
-                                    <Card.Title>{plan.name}</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">{plan.location}</Card.Subtitle>
-                                    <Card.Text>{plan.description}</Card.Text>
-                                    <Card.Text><strong>Dirección:</strong> {plan.address}</Card.Text>
-                                    <Card.Text><strong>Precio:</strong> ${plan.price}</Card.Text>
+                                    <Card.Title>{hotel.name}</Card.Title>
+                                    <Card.Subtitle className="mb-2 text-muted">{hotel.location.city.name}</Card.Subtitle>
+                                    <Card.Text>{hotel.description}</Card.Text>
+                                    <Card.Text><strong>Dirección:</strong> {hotel.address}</Card.Text>
+                                    <Card.Text><strong>Precio:</strong> ${hotel.price}</Card.Text>
+                                    <Card.Text><strong>Ubicación:</strong> {hotel.location.name} - {hotel.location.description}</Card.Text>
+                                    <Card.Text><strong>Ciudad:</strong> {hotel.location.city.name}, {hotel.location.city.department}</Card.Text>
                                 </Card.Body>
                             </Card>
                         ))}
                     </Row>
+
                 )}
             </Container>
-        </div>
+        </>
     );
-};
+}

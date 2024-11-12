@@ -5,6 +5,7 @@ import Background from '../components/Backgorund/BackGround';
 import './styles.css';
 import { useParams } from 'react-router-dom';
 
+
 const Touristplans = () => {
     const { cityId } = useParams()
     const [searchTerm, setSearchTerm] = useState('');

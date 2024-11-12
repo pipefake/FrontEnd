@@ -15,19 +15,19 @@ const Header = () => {
         navigate('/'); // Redirect to login page
     };
     const handleReservas = () => {
-        navigate('/reservas'); // Redirect to login page
+        navigate('/auth/reservas'); // Redirect to login page
     };
 
     const handlePublicar = () => {
-        navigate('/publicar'); // Redirect to login page
+        navigate('/auth/publicar'); // Redirect to login page
     };
 
     const handlePerfil = () => {
-        navigate('/perfil'); // Redirect to login page
+        navigate('/auth/perfil'); // Redirect to login page
     };
 
     const handleHome = () => {
-        navigate('/'); // Redirect to login page
+        navigate('/auth'); // Redirect to login page
     };
 
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Row, Col, Button, Card } from 'react-bootstrap';
 import Reservation from '../Reservation/Reservation';
-import DefaultPlaceImg from '../../assets/images/default_place.jpg';
+import DefaultPlaceImg from '../../assets/img/default_place.jpg';
 import { useNavigate } from "react-router-dom";
 
 const PlanLayout = ({ hotelsData }) => {
@@ -22,7 +22,7 @@ const PlanLayout = ({ hotelsData }) => {
     };
 
     const handleGoToDetailTouristPlan = (idTouristPlan) => {
-        navigate(`/plan/detail/${idTouristPlan}`)
+        navigate(`/auth/plan/detail/${idTouristPlan}`)
     }
 
     return (

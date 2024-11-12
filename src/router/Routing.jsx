@@ -1,28 +1,38 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from '../components/Header';
-import Home from '../views/Home'
-import Reservation from '..//components/Reservation/Reservation';
-import Touristplans  from '../views/Touristplans';
+import Home from '../views/Home';
+import { PrivatePages } from '../components/Login/PrivatePages';
+import Reservation from '../components/Reservation/Reservation';
+import Touristplans from '../views/Touristplans';
 import { Publicar } from '../views/Publicar';
 import { Perfil } from '../views/Perfil';
 import { Reservas } from '../views/Reservas';
 import DetailToristPlan from '../components/touristPlan/DetailToristPlan';
+import { AuthProvider } from '../context/AuthProvider';
+import { Error404 } from '../components/Error404';
 
 export const Routing = () => {
-    return (
-      <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
+  return (
+    <BrowserRouter>
+      <AuthProvider>
+        <Header />
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/" element={<Home />} />
 
-        <Route path="/plans/:cityId" element={<Touristplans />} />
-        <Route path="/plan/detail/:planToristId" element={<DetailToristPlan />} />
-        <Route path="/reservation" element={<Reservation />} />
-        <Route path="/publicar" element={<Publicar />} />
-        <Route path="/perfil" element={<Perfil />} />
-        <Route path="/reservas" element={<Reservas />} />
+          <Route path="/auth" element={<PrivatePages />}>
+            <Route path="plans/:cityId" element={<Touristplans />} />
+            <Route path="plan/detail/:planToristId" element={<DetailToristPlan />} />
+            <Route path="reservation" element={<Reservation />} />
+            <Route path="publicar" element={<Publicar />} />
+            <Route path="perfil" element={<Perfil />} />
+            <Route path="reservas" element={<Reservas />} />
+          </Route>
 
-      </Routes>
+          {/* Configuramos la ruta para el error 404 */}
+          <Route path="*" element={<Error404 />} />
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
-    )
-  }
+  );
+};

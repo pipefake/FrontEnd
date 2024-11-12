@@ -4,13 +4,19 @@ import "./Login.css";
 import { useForm } from "../../hooks/useForm";
 import { Global } from '../../helpers/Global';
 import Swal from 'sweetalert2';
+import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 //Componente login para inicio de sesion
 const Login = () => {
+    const navigate = useNavigate();
 
     //Estados para activar formulario
     const [saved, setSaved] = useState(false);
 
+    // Estado para setear los valores del token y usuario en el contexto de la aplicación
+    const { setAuth } = useAuth();
+    
     // Usar el hook personalizado useForm para cargar los datos del formulario
     const { form, changed } = useForm({});
 
@@ -46,10 +52,16 @@ const Login = () => {
         // Obtener la información retornada por el backend
         const data = await request.json();
         localStorage.setItem('Token', data.data.token);
+        localStorage.setItem("User", JSON.stringify(data.data.user)); 
+        // localStorage.setItem("user", JSON.stringify(data.data.user)); 
         // Verificar si el estado de la respuesta es "success" seteamos la variable de estado saved con "saved"
         if (request.status === 200 && data.status === "loggedIn") {
             setSaved("saved");
             setLoadingForm(false);
+                  // Redirección
+      navigate("/auth");
+            // Seteamos los datos del usuario en el Auth
+            setAuth(data.user);
             // Mostrar el modal de éxito
             Swal.fire({
                 title: data.message,
@@ -77,8 +89,8 @@ const Login = () => {
         <Container >
             <Button className="btnLogin" variant="outline-dark" onClick={() => setActive(!active)}>Login</Button>
             {active && (
-                <div className="overlay" onClick={() => setActive(false)}>
-                    <div className="popup" onClick={(e) => e.stopPropagation()}>
+                <Row className="overlay" onClick={() => setActive(false)}>
+                    <Row className="popup" onClick={(e) => e.stopPropagation()}>
                         <h2 className="text-center">Ingresar</h2>
                         <Form onSubmit={handleSubmit}>
                             <Form.Group controlId="formBasicEmail">
@@ -112,8 +124,8 @@ const Login = () => {
                                 {loadingForm ? 'Loading...' : 'Ingresar'}
                             </Button>
                         </Form>
-                    </div>
-                </div>
+                    </Row>
+                </Row>
             )}
         </Container>
     );

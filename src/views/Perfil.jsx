@@ -39,15 +39,15 @@ export const Perfil = () => {
     }
 
     return (
-        <div>
+        <>
             <Background />
             <Container>
                 {/* Título */}
                 <h1 className="font-weight-bold text-center mb-4 display-3">Perfil de Usuario</h1>
                 <Row className="justify-content-center">
-                    <div style={{ height: "8px", width: "60%", backgroundColor: "#FFFFFF" }}></div>
-                    <div style={{ height: "8px", width: "60%", backgroundColor: "#007D00" }}></div>
-                    <div style={{ height: "8px", width: "60%", backgroundColor: "#FCDD09" }}></div>
+                    <Row style={{ height: "8px", width: "60%", backgroundColor: "#FFFFFF" }}></Row>
+                    <Row style={{ height: "8px", width: "60%", backgroundColor: "#007D00" }}></Row>
+                    <Row style={{ height: "8px", width: "60%", backgroundColor: "#FCDD09" }}></Row>
                 </Row>
             </Container>
             <Container className="formPublication mt-4">
@@ -81,7 +81,7 @@ export const Perfil = () => {
                     </Button>
                 </Form>
             </Container>
-        </div>
+        </>
     );
 };
 
