@@ -10,6 +10,7 @@ import { Reservas } from '../views/Reservas';
 import DetailToristPlan from '../components/touristPlan/DetailToristPlan';
 import { AuthProvider } from '../context/AuthProvider';
 import { Error404 } from '../components/Error404';
+import { PublicPages } from '../components/Login/PublicPages';
 
 export const Routing = () => {
   return (
@@ -17,9 +18,11 @@ export const Routing = () => {
       <AuthProvider>
         <Routes>
           {/* Public Routes */}
-          <Route path="/" element={<Home />} />
-          <Route path="plans/:cityId" element={<Touristplans />} />
-          <Route path="plan/detail/:planToristId" element={<DetailToristPlan />} />
+          <Route path="/" element={ <PublicPages />}>
+            <Route index element={<Home />} />
+            <Route path="plans/:cityId" element={<Touristplans />} />
+            <Route path="plan/detail/:planToristId" element={<DetailToristPlan />} />
+          </Route>
           {/* Private Routes */}
           <Route path="/my-account" element={<PrivatePages />}>
             <Route path="perfil" element={<Perfil />} />
