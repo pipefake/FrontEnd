@@ -26,10 +26,6 @@ const Login = () => {
     //Estados para activar formulario
     const [active, setActive] = useState(false);
 
-    //Estados para almacenar correo y contraseña
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
     //Método de prueba que imprime los estados por consola
     // Método Guardar un usuario en la BD
     const handleSubmit = async (e) => {
@@ -58,8 +54,6 @@ const Login = () => {
         if (request.status === 200 && data.status === "loggedIn") {
             setSaved("saved");
             setLoadingForm(false);
-                  // Redirección
-      navigate("/auth");
             // Seteamos los datos del usuario en el Auth
             setAuth(data.user);
             // Mostrar el modal de éxito
@@ -73,6 +67,8 @@ const Login = () => {
                 console.log("Login exitoso")
             });
             setActive(false);
+             // Redirección
+            navigate("/my-account/perfil");
         } else {
             setSaved("error");
             setActive(false);

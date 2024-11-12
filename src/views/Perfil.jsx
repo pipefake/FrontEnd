@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Button, Form } from 'react-bootstrap';
-import Background from '../components/Backgorund/Background';
+import Background from '../components/Backgorund/BackGround';
 
 
 const fetchUserData = async () => {

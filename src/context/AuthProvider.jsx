@@ -39,11 +39,11 @@ export const AuthProvider = ({ children }) => {
       const userId = userObj._id;
 
       // Petición Ajax al backend que compruebe el token y que nos devuelva todos los datos del usuario
-      const request = await fetch(Global.url + "/users/" + userId, {
+      const request = await fetch(Global.url + "/users/profile", {
         method: "GET",
         headers: {
           'Content-Type': 'application/json',
-          "authorization": token,
+          "authorization": `Bearer ${token}`,
         },
       });
 
@@ -58,25 +58,6 @@ export const AuthProvider = ({ children }) => {
       
       // Asegurar que loading se actualice a false
       setLoading(false);
-
-      // Petición Ajax al backend para los contadores
-    //   const requestCounters = await fetch(Global.url + "user/counters/" + userId, {
-    //     method: "GET",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       "Authorization": token,
-    //     },
-    //   });
-
-    //   if (!requestCounters.ok) {
-    //     throw new Error(`Error ${requestCounters.status}: ${requestCounters.statusText}`);
-    //   }
-
-    //   const dataCounters = await requestCounters.json();
-
-    //   // Setear el estado de Counters
-    //   setCounters(dataCounters);
-
     } catch (error) {
       console.error("Error en autenticación:", error);
     } finally {

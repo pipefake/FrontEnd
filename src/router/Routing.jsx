@@ -19,13 +19,13 @@ export const Routing = () => {
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Home />} />
-
-          <Route path="/auth" element={<PrivatePages />}>
-            <Route path="plans/:cityId" element={<Touristplans />} />
-            <Route path="plan/detail/:planToristId" element={<DetailToristPlan />} />
+          <Route path="plans/:cityId" element={<Touristplans />} />
+          <Route path="plan/detail/:planToristId" element={<DetailToristPlan />} />
+          {/* Private Routes */}
+          <Route path="/my-account" element={<PrivatePages />}>
+            <Route path="perfil" element={<Perfil />} />
             <Route path="reservation" element={<Reservation />} />
             <Route path="publicar" element={<Publicar />} />
-            <Route path="perfil" element={<Perfil />} />
             <Route path="reservas" element={<Reservas />} />
           </Route>
 
