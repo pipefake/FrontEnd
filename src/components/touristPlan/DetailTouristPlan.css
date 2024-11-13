@@ -1,0 +1,114 @@
+.plan-page {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    color: #333;
+    flex-direction: column;
+    display: flex;
+    margin-top: 85px;
+  }
+  
+  h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .search-bar input {
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+  }
+  
+  .tabs {
+    display: flex;
+  }
+  
+  .tab {
+    padding: 8px 16px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    color: #333;
+    font-weight: bold;
+    border-bottom: 2px solid transparent;
+  }
+  .nombre-ciudad{
+    font-size: 45px;
+  }
+  .tab.active {
+    color: #2EE52E;
+    border-bottom-color: #2EE52E;
+  }
+  
+  .plan-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    gap: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    
+  }
+  
+  .cover-image img {
+    width: 200px;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .plan-info {
+    flex: 1;
+    flex: display;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    padding: 2%;
+  }
+  
+  .location-map {
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #666;
+  }
+  
+  .creator-info {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #666;
+    display: flex;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+  }
+  
+  .creator-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .city-image {
+    width: 50%;
+    max-width: 30vw;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+  

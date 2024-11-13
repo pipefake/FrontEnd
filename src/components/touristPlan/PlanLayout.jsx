@@ -52,18 +52,19 @@ const PlanLayout = ({ hotelsData }) => {
                                 <Card.Body>
                                     <Card.Title>{hotel.name}</Card.Title>
                                     <Card.Text>{hotel.description}</Card.Text>
-                                    <Button variant="success" onClick={() => handleCardClick(hotel.id)} className="mb-3">
-                                        Reservar
-                                    </Button>
+                                    
                                     <div>
                                         <span>
                                             ⭐ 4.5 - 10 opiniones
                                         </span>
                                         <p>
-                                            <strong>De {hotel.createdBy.name}</strong>
+                                            <strong>Publicado por: {hotel.createdBy.name}</strong>
                                         </p>
                                         <p>$ {hotel.price}</p>
                                     </div>
+                                    <Button variant="success" onClick={() => handleCardClick(hotel.id)} className="mb-3">
+                                        Ver más
+                                    </Button>
                                 </Card.Body>
                             )}
                         </Card>
