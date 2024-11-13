@@ -1,34 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Card } from 'react-bootstrap';
-import Background from '../components/Backgorund/BackGround';
+import Background from '../components/Backgorund/Background';
+import { Global } from '../helpers/Global';
 
 export const Reservas = () => {
-    const reservationsData = [
-        {
-            user_id: "60b6c0e0f2a1c143d8d7f3b7",
-            tourist_plans_id: "67301f2f75d9529b4c38738d",
-            checkIn: "2024-11-15T14:00:00.000Z",
-            checkOut: "2024-11-20T10:00:00.000Z",
-            status: "Confirmed",
-            created_at: "2024-11-01T08:00:00.000Z"
-        },
-        {
-            user_id: "60b6c0e0f2a1c143d8d7f3b8",
-            tourist_plans_id: "60b6c0e0f2a1c143d8d7f3b4",
-            checkIn: "2024-12-05T14:00:00.000Z",
-            checkOut: "2024-12-10T10:00:00.000Z",
-            status: "Pending",
-            created_at: "2024-11-05T08:00:00.000Z"
-        },
-        {
-            user_id: "60b6c0e0f2a1c143d8d7f3b9",
-            tourist_plans_id: "60b6c0e0f2a1c143d8d7f3b3",
-            checkIn: "2024-12-15T14:00:00.000Z",
-            checkOut: "2024-12-20T10:00:00.000Z",
-            status: "Cancelled",
-            created_at: "2024-11-10T08:00:00.000Z"
+    // Estados para manejar las reservas, la carga y errores
+    const [token, setToken] = useState(localStorage.getItem('Token'));
+    const [reservationsData, setReservationsData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    // Función para obtener las reservas desde el endpoint
+    const getReservations = async () => {
+        try {
+            const response = await fetch(`${Global.url}/reservations/get_by_client`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al obtener las reservas');
+            }
+
+            const data = await response.json();
+            setReservationsData(data);
+        } catch (error) {
+            console.error('Hubo un problema con la petición:', error);
+            setError('Hubo un problema con la petición');
+        } finally {
+            setLoading(false);
         }
-    ];
+    };
+
+    useEffect(() => {
+        getReservations();
+    }, []);
+
+    if (loading) {
+        return <div>Cargando...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     return (
         <div>
@@ -48,12 +65,11 @@ export const Reservas = () => {
                         <Card key={index} className="mb-3 w-100">
                             <Card.Body>
                                 <Card.Title>Reservation #{index + 1}</Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted">User ID: {reservation.user_id}</Card.Subtitle>
-                                <Card.Text><strong>Plan ID:</strong> {reservation.tourist_plans_id}</Card.Text>
+                                <Card.Subtitle className="mb-2 text-muted">Plan reservado: {reservation.touristPlan.name}</Card.Subtitle>
+                                <Card.Text><strong>Usuario:</strong> {reservation.user.name}</Card.Text>
                                 <Card.Text><strong>Check-In:</strong> {new Date(reservation.checkIn).toLocaleDateString()}</Card.Text>
                                 <Card.Text><strong>Check-Out:</strong> {new Date(reservation.checkOut).toLocaleDateString()}</Card.Text>
-                                <Card.Text><strong>Status:</strong> {reservation.status}</Card.Text>
-                                <Card.Text><strong>Created At:</strong> {new Date(reservation.created_at).toLocaleDateString()}</Card.Text>
+                                <Card.Text><strong>Created At:</strong> {new Date(reservation.createdAt).toLocaleDateString()}</Card.Text>
                             </Card.Body>
                         </Card>
                     ))}
@@ -62,3 +78,5 @@ export const Reservas = () => {
         </div>
     );
 };
+
+

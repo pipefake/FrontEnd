@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Form, Card, Nav } from 'react-bootstrap';
 import PlanLayout from '../components/touristPlan/PlanLayout';
-import Background from '../components/Backgorund/BackGround';
+import Background from '../components/Backgorund/Background';
 import './styles.css';
 import { useParams } from 'react-router-dom';
+import { Global } from '../helpers/Global';
 
 
 const Touristplans = () => {
@@ -23,7 +24,7 @@ const Touristplans = () => {
     };
 
     const getTouristPlans = async () => {
-        const response = await fetch(`https://huila-travel-backend.onrender.com/api/touristPlans?cityId=${cityId}`, {
+        const response = await fetch(`${Global.url}/touristPlans?cityId=${cityId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from "../hooks/useForm";
 import { Container, Row, Button, Form, Card } from 'react-bootstrap';
-import Background from '../components/Backgorund/BackGround';
+import Background from '../components/Backgorund/Background';
+import { Lines } from '../components/Lines';
+import { Global } from '../helpers/Global';
 
 export const Publicar = () => {
     const { form, changed } = useForm({});
@@ -10,25 +12,6 @@ export const Publicar = () => {
     const [hotelsData, setHotelsData] = useState([]);
     const [showForm, setShowForm] = useState(false);
 
-    // const hotelsData = [
-    //     {
-    //         "name": "Beachfront Villa",
-    //         "description": "Luxury villa on the beach with private pool and ocean views.",
-    //         "location": {
-    //             "city": "Malibu",
-    //             "lat": 34.0259,
-    //             "lon": -118.7798
-    //         },
-    //         "address": "123 Ocean Drive, Malibu, CA",
-    //         "price": 500,
-    //         "coverImage": "villa_beach.png",
-    //         "images": ["villa1.png", "villa2.png", "villa3.png"],
-    //         "available": true,
-    //         "createdBy": "60b6c0e0f2a1c143d8d7f3b1",
-    //         "createdAt": "2024-11-10T08:00:00.000Z"
-    //     },
-    //     // Add other hotel data similarly...
-    // ];
 
     useEffect(() => {
         fetchPlans();
@@ -36,7 +19,7 @@ export const Publicar = () => {
 
     const fetchPlans = async () => {
         try {
-            const response = await fetch('http://localhost:3002/api/touristPlans');
+            const response = await fetch(`${Global}/touristPlans`);
             if (!response.ok) throw new Error('Error fetching plans');
             const plans = await response.json();
             setHotelsData(plans);
@@ -67,7 +50,7 @@ export const Publicar = () => {
                 available: true, // Set to true by default
             };
 
-            const response = await fetch('http://localhost:3002/api/plans', {
+            const response = await fetch(`${Global}/plans`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -90,11 +73,7 @@ export const Publicar = () => {
             <Background />
             <Container>
                 <h1 className="font-weight-bold text-center mb-4 display-3">Publica tus planes turísticos</h1>
-                <Row className="justify-content-center">
-                    <Row style={{ height: "8px", width: "60%", backgroundColor: "#FFFFFF" }}></Row>
-                    <Row style={{ height: "8px", width: "60%", backgroundColor: "#007D00" }}></Row>
-                    <Row style={{ height: "8px", width: "60%", backgroundColor: "#FCDD09" }}></Row>
-                </Row>
+                <Lines/>
             </Container>
 
             <Container className="mt-4">

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
-import Background from '../components/Backgorund/BackGround';
+import Background from '../components/Backgorund/Background';
 import { Cities } from '../components/Cities/Cities'; 
+import { Global } from '../helpers/Global';
+import { Lines } from '../components/Lines';
 
 const Home = () => {
     // Creamos un estado para almacenar el valor del buscador
@@ -23,7 +25,7 @@ const Home = () => {
     const handleSubmit = async () => {
         try {
             // Petición a la API (Backend) para listar las ciudades
-            const response = await fetch('https://huila-travel-backend.onrender.com/api/locations/cities', {
+            const response = await fetch(`${Global.url}/locations/cities`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
@@ -57,11 +59,7 @@ const Home = () => {
             <Container fixed="top">
                 {/* Título */}
                 <h1 className="font-weight-bold text-center mb-4 display-3">¿Qué ciudad del Huila deseas visitar?</h1>
-                <Row className="justify-content-center">
-                    <div style={{ height: "8px", width:"60%", backgroundColor: "#FFFFFF" }}></div>
-                    <div style={{ height: "8px", width:"60%", backgroundColor: "#007D00" }}></div>
-                    <div style={{ height: "8px", width:"60%", backgroundColor: "#FCDD09 " }}></div>
-                </Row>
+                <Lines/>
 
                 {/* Barra de búsqueda */}
                 <Row className="mt-3 justify-content-center mb-4">

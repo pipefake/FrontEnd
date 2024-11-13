@@ -37,6 +37,9 @@ const Header = () => {
                 {/* Show Login and Register if token does not exist */}
                 {!token ? (
                     <>
+                        <Col xs={10} md={6} lg={2} className="align-center">
+                        <Button className="btnLogin" variant="outline-dark" onClick={()=>{handleHome()}}> Inicio</Button>
+                        </Col>
                         <Col xs={10} md={6} lg={2}>
                             <Login />
                         </Col>

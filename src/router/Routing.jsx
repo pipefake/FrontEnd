@@ -21,12 +21,11 @@ export const Routing = () => {
           <Route path="/" element={ <PublicPages />}>
             <Route index element={<Home />} />
             <Route path="plans/:cityId" element={<Touristplans />} />
-            <Route path="plan/detail/:planToristId" element={<DetailToristPlan />} />
+            <Route path="plan/detail/:touristPlanId" element={<DetailToristPlan />} />
           </Route>
           {/* Private Routes */}
           <Route path="/my-account" element={<PrivatePages />}>
             <Route path="perfil" element={<Perfil />} />
-            <Route path="reservation" element={<Reservation />} />
             <Route path="publicar" element={<Publicar />} />
             <Route path="reservas" element={<Reservas />} />
           </Route>

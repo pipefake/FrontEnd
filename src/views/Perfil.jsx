@@ -1,39 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Button, Form } from 'react-bootstrap';
-import Background from '../components/Backgorund/BackGround';
-
-
-const fetchUserData = async () => {
-    return {
-        name: "John",
-        lastName: "Doe",
-        nick: "johndoe123",
-        email: "john@example.com",
-        phoneNumber: "123456789",
-        image: "profile_pic.png",
-        roles: ["CLIENT"],
-    };
-};
+import { Container, Button, Form } from 'react-bootstrap';
+import Background from '../components/Backgorund/Background';
+import { Lines } from '../components/Lines';
+import { Global } from '../helpers/Global';
 
 export const Perfil = () => {
     const [userData, setUserData] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [token, setToken] = useState(localStorage.getItem('Token'));
 
-    useEffect(() => {
-        const getUserData = async () => {
-            try {
-                const data = await fetchUserData();
-                setUserData(data);
-            } catch (error) {
-                console.error("Error al cargar datos del usuario:", error);
-            } finally {
-                setLoading(false);
+
+    const getProfile = async () => {
+        try {
+            const response = await fetch(`${Global.url}/users/profile`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al obtener el perfil');
             }
-        };
 
-        getUserData();
+            const data = await response.json();
+            setUserData(data);
+        } catch (error) {
+            console.error('Hubo un problema con la petición:', error);
+            setError('Hubo un problema con la petición');
+        } finally {
+            setLoading(false);
+        }
+    };
+    useEffect(() => {
+        getProfile();
     }, []);
-
     if (loading) {
         return <p>Cargando perfil...</p>;
     }
@@ -44,11 +47,7 @@ export const Perfil = () => {
             <Container>
                 {/* Título */}
                 <h1 className="font-weight-bold text-center mb-4 display-3">Perfil de Usuario</h1>
-                <Row className="justify-content-center">
-                    <Row style={{ height: "8px", width: "60%", backgroundColor: "#FFFFFF" }}></Row>
-                    <Row style={{ height: "8px", width: "60%", backgroundColor: "#007D00" }}></Row>
-                    <Row style={{ height: "8px", width: "60%", backgroundColor: "#FCDD09" }}></Row>
-                </Row>
+                <Lines/>
             </Container>
             <Container className="formPublication mt-4">
                 <Form>
@@ -74,7 +73,7 @@ export const Perfil = () => {
                     </Form.Group>
                     <Form.Group controlId="formUserRoles" className="mt-3">
                         <Form.Label>Roles</Form.Label>
-                        <Form.Control type="text" value={userData.roles.join(', ')} readOnly />
+                        <Form.Control type="text" value={userData.roles} readOnly />
                     </Form.Group>
                     <Button variant="primary" className="mt-3 w-100">
                         Editar Perfil
