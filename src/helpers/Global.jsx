@@ -1,4 +1,4 @@
 // Ruta del Backend desplegado
 export const Global = {
-    url: "http://localhost:3002/api"
+    url: "https://huila-travel-backend.onrender.com/api"
 }
