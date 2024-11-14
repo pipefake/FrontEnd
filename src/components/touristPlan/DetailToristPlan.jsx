@@ -12,7 +12,7 @@ const DetailTouristPlan = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showReservation, setShowReservation] = useState(false); 
-  const [token, setToken] = useState(localStorage.getItem('Token'));
+  const token = localStorage.getItem('Token');
 
   const { touristPlanId } = useParams();
 

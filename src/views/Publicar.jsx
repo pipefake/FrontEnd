@@ -11,7 +11,7 @@ export const Publicar = () => {
     const [fetchedPlans, setFetchedPlans] = useState([]);
     const [hotelsData, setHotelsData] = useState([]);
     const [showForm, setShowForm] = useState(false);
-// Array de ciudades
+    const token = localStorage.getItem('Token');
 
     useEffect(() => {
         fetchPlans();
@@ -33,26 +33,17 @@ export const Publicar = () => {
         setLoadingForm(true);
         try {
             const requestBody = {
-                location: {
-                    name: form.location?.name,
-                    description: form.location?.description,
-                    city: form.location?.city,
-                    lat: form.location?.lat,
-                    lon: form.location?.lon,
-                },
-                name: form.name,
-                description: form.description,
-                address: form.address,
-                price: form.price,
-                coverImage: "default_image.png",
+                ...form,
+                coverImage: form.coverImage,
                 images: [],
                 available: true,
             };
 
-            const response = await fetch(`${Global.url}/plans`, {
+            const response = await fetch(`${Global.url}/touristPlans/create`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(requestBody)
             });
@@ -98,7 +89,7 @@ export const Publicar = () => {
                             <Form.Label>Nombre de la ubicación</Form.Label>
                             <Form.Control
                                 type="text"
-                                name="locationName"
+                                name="location.name"
                                 placeholder="Nombre de la ubicación"
                                 onChange={changed}
                                 value={form.location?.name || ''}
@@ -110,7 +101,7 @@ export const Publicar = () => {
                             <Form.Label>Descripción de la ubicación</Form.Label>
                             <Form.Control
                                 as="textarea"
-                                name="locationDescription"
+                                name="location.description"
                                 placeholder="Descripción de la ubicación"
                                 onChange={changed}
                                 value={form.location?.description || ''}
@@ -120,8 +111,8 @@ export const Publicar = () => {
                         <Form.Group controlId="formBasicCity">
                             <Form.Label>Ciudad</Form.Label>
                             <Form.Control
-                                type="text"
-                                name="locationCity"
+                                type="number"
+                                name="location.city"
                                 placeholder="Ciudad"
                                 onChange={changed}
                                 value={form.location?.city || ''}
@@ -132,7 +123,7 @@ export const Publicar = () => {
                             <Form.Label>Latitud</Form.Label>
                             <Form.Control
                                 type="number"
-                                name="locationLat"
+                                name="location.lat"
                                 placeholder="Latitud"
                                 onChange={changed}
                                 value={form.location?.lat || ''}
@@ -143,7 +134,7 @@ export const Publicar = () => {
                             <Form.Label>Longitud</Form.Label>
                             <Form.Control
                                 type="number"
-                                name="locationLon"
+                                name="location.lon"
                                 placeholder="Longitud"
                                 onChange={changed}
                                 value={form.location?.lon || ''}
