@@ -11,7 +11,7 @@ export const Publicar = () => {
     const [fetchedPlans, setFetchedPlans] = useState([]);
     const [hotelsData, setHotelsData] = useState([]);
     const [showForm, setShowForm] = useState(false);
-
+// Array de ciudades
 
     useEffect(() => {
         fetchPlans();
@@ -19,7 +19,7 @@ export const Publicar = () => {
 
     const fetchPlans = async () => {
         try {
-            const response = await fetch(`${Global}/touristPlans`);
+            const response = await fetch(`${Global.url}/touristPlans`);
             if (!response.ok) throw new Error('Error fetching plans');
             const plans = await response.json();
             setHotelsData(plans);
@@ -32,11 +32,10 @@ export const Publicar = () => {
         e.preventDefault();
         setLoadingForm(true);
         try {
-            // Create the request body with the correct structure
             const requestBody = {
                 location: {
-                    name: form.location?.name, // Add the name of the location
-                    description: form.location?.description, // Add a description of the location
+                    name: form.location?.name,
+                    description: form.location?.description,
                     city: form.location?.city,
                     lat: form.location?.lat,
                     lon: form.location?.lon,
@@ -45,12 +44,12 @@ export const Publicar = () => {
                 description: form.description,
                 address: form.address,
                 price: form.price,
-                coverImage: "default_image.png", // You can modify this if you have an image upload feature
-                images: [], // Assuming you will add images later
-                available: true, // Set to true by default
+                coverImage: "default_image.png",
+                images: [],
+                available: true,
             };
 
-            const response = await fetch(`${Global}/plans`, {
+            const response = await fetch(`${Global.url}/plans`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -73,7 +72,7 @@ export const Publicar = () => {
             <Background />
             <Container>
                 <h1 className="font-weight-bold text-center mb-4 display-3">Publica tus planes turísticos</h1>
-                <Lines/>
+                <Lines />
             </Container>
 
             <Container className="mt-4">
@@ -211,7 +210,6 @@ export const Publicar = () => {
                             </Card>
                         ))}
                     </Row>
-
                 )}
             </Container>
         </>
